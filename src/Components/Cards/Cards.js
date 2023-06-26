@@ -3,6 +3,7 @@ import { Button, Card } from 'react-bootstrap';
 
 const Cards = (props) => {
      const {title, description, urlToImage, author, url} = props.article;
+     const addLinked = props.addLink;
     return (
         <div>
             <Card style={{ width: '32rem' }}>
@@ -11,7 +12,8 @@ const Cards = (props) => {
                     <Card.Title>{title}</Card.Title>
                     <Card.Text>{description}</Card.Text>
                     <Card.Text>Author: {author}</Card.Text>
-                    <Button style={{align: 'center'}} variant="primary"><a href={url} target='blank' className="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Details</a></Button>
+                    {/* <Button style={{align: 'center'}} variant="primary"><a href={url} target='blank' className="link-dark link-offset-2 link-underline-opacity-25 link-underline-opacity-100-hover">Details</a></Button> */}
+                    <Button variant="primary" onMouseMove={() => addLinked(author)}>Add text here for</Button>
                 </Card.Body>
             </Card>
         </div>
