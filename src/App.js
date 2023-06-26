@@ -1,23 +1,30 @@
-import logo from './logo.svg';
+import { useEffect, useState } from 'react';
 import './App.css';
+import ButtonPractice from './Components/Button/ButtonPractice';
+import Cards from './Components/Cards/Cards';
+// // Bootstrap CSS
+// import "bootstrap/dist/css/bootstrap.min.css";
+// // Bootstrap Bundle JS
+// import "bootstrap/dist/js/bootstrap.bundle.min";
+
 
 function App() {
+  const [news , setNews] = useState([]);
+
+  useEffect(() => {
+    fetch('https://newsapi.org/v2/everything?q=tesla&from=2023-05-26&sortBy=publishedAt&apiKey=da038a4401b24d67af342102fb153c48')
+    .then(res => res.json())
+    .then(data => setNews(data.articles))
+  }, [])
+
+  console.log(news);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>Breaking News: {news.length}</h1>
+      {/* <ButtonPractice></ButtonPractice> */}
+      {
+        news.map(article => <Cards article={article}></Cards>)
+      }
     </div>
   );
 }
